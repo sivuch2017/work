@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="Shift_JIS" ?>
+<customUI onLoad="Ribbon_onLoad" xmlns="http://schemas.microsoft.com/office/2006/01/customui">
+    <ribbon>
+      <tabs>
+        <tab id="CustomTab" label="開発環境">
+          <group id="Group1" label="全般">
+            <button id="Button11" imageMso="PrintPreviewClose" label="自動作成シートクリア" size="normal" onAction="CustomUI.Button11" />
+            <button id="Button13" imageMso="FileCompactAndRepairDatabase" label="メンテナンス" size="normal" onAction="CustomUI.Button13" />
+            <button id="Button12" imageMso="CreateTable" label="開発環境&#xD;&#xA;一覧表示" size="large" onAction="CustomUI.Button12" />
+            <button id="Button14" imageMso="DatabaseMoveToSharePoint" label="DB更新" size="large" onAction="CustomUI.Button14" />
+          </group >
+          <group id="Group2" label="GXテストサーバー">
+            <button id="Button21" imageMso="CreateTable" label="一覧表示" size="large" onAction="CustomUI.Button21" />
+            <button id="Button22" imageMso="DatabaseMoveToSharePoint" label="DB更新" size="large" onAction="CustomUI.Button22" />
+          </group >
+          <group id="Group3" label="ハードウェア">
+            <button id="Button31" imageMso="CreateTable" label="一覧表示" size="large" onAction="CustomUI.Button31" />
+            <button id="Button32" imageMso="DatabaseMoveToSharePoint" label="DB更新" size="large" onAction="CustomUI.Button32" />
+          </group >
+          <group id="Group9" label="ソフトウェア">
+            <button id="Button91" imageMso="CreateTable" label="一覧表示" size="large" onAction="CustomUI.Button91" />
+            <button id="Button92" imageMso="DatabaseMoveToSharePoint" label="DB更新" size="large" onAction="CustomUI.Button92" />
+            <button id="Button93" imageMso="CellsDelete" label="一行削除" size="large" onAction="CustomUI.Button93" />
+          </group >
+          <group id="Group4" label="IPアドレス">
+            <button id="Button41" imageMso="CreateTable" label="一覧表示" size="large" onAction="CustomUI.Button41" />
+            <button id="Button42" imageMso="DatabaseMoveToSharePoint" label="DB更新" size="large" onAction="CustomUI.Button42" />
+            <button id="Button43" imageMso="FileStartWorkflow" label="ECHO" size="large" onAction="CustomUI.Button43" />
+          </group >
+          <group id="Group5" label="停電対応">
+            <button id="Button51" imageMso="CreateTable" label="一覧表示" size="large" onAction="CustomUI.Button51" />
+            <button id="Button52" imageMso="DatabaseMoveToSharePoint" label="DB更新" size="large" onAction="CustomUI.Button52" />
+            <button id="Button53" imageMso="FileStartWorkflow" label="ECHO" size="large" onAction="CustomUI.Button53" />
+          </group >
+          <group id="Group7" label="外部ディスク">
+            <button id="Button71" imageMso="CreateTable" label="一覧表示" size="large" onAction="CustomUI.Button71" />
+          </group >
+          <group id="Group8" label="仮想マシン">
+            <button id="Button81" imageMso="CreateTable" label="一覧表示" size="large" onAction="CustomUI.Button81" />
+            <button id="Button82" imageMso="DatabaseMoveToSharePoint" label="DB更新" size="large" onAction="CustomUI.Button82" />
+            <button id="Button83" imageMso="CellsDelete" label="一行削除" size="large" onAction="CustomUI.Button83" />
+            <button id="Button84" imageMso="FileStartWorkflow" label="ECHO" size="large" onAction="CustomUI.Button84" />
+          </group >
+          <group id="Group6" label="破棄済">
+            <button id="Button61" imageMso="CreateTable" label="一覧表示" size="large" onAction="CustomUI.Button61" />
+            <button id="Button62" imageMso="DatabaseMoveToSharePoint" label="DB更新" size="large" onAction="CustomUI.Button62" />
+          </group >
+       </tab>
+      </tabs>
+   </ribbon>
+</customUI>
