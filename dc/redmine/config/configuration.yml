@@ -1,0 +1,7 @@
+default:
+  email_delivery:
+      delivery_method: :smtp
+      smtp_settings:
+        address: "mail"
+        port: 1025
+        domain: test.local

@@ -1,0 +1,51 @@
+version: '2'
+services:
+  mysql:
+    image: mysql:5.5
+    hostname: mysql
+    domainname: test.local
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=redmine
+    volumes:
+      - mysqldata:/var/lib/mysql
+      - ./share:/share
+  redmine:
+    image: redmine:3.3
+    hostname: redmine
+    domainname: test.local
+    ports:
+      - 8080:3000
+    environment:
+      - REDMINE_DB_MYSQL=mysql
+      - REDMINE_DB_PASSWORD=root
+    volumes:
+      - ./redmine/config/configuration.yml:/usr/src/redmine/config/configuration.yml
+      - ./redmine/public/themes/redmine_theme_farend_fancy-master:/usr/src/redmine/public/themes/redmine_theme_farend_fancy-master
+      - ./share:/share
+    depends_on:
+      - mysql
+  mail:
+    image: jeanberu/mailcatcher
+    hostname: mail
+    domainname: test.local
+    expose:
+      - 1025
+    ports:
+      - 8081:1080
+    volumes:
+      - ./share:/share
+  web:
+    image: httpd:2.4-alpine
+    hostname: web
+    domainname: test.local
+    ports:
+      - 8082:80
+    volumes:
+      - ./web/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./web/conf/extra/proxy-html.conf:/usr/local/apache2/conf/extra/proxy-html.conf
+      - ./share:/share
+volumes:
+  mysqldata:
+    driver: local
