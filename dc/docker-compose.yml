@@ -12,11 +12,14 @@ services:
       - mysqldata:/var/lib/mysql
       - ./share:/share
   redmine:
-    image: redmine:3.3
+    image: sra00346/redmine:3.3
+    build: 
+      context: build/redmine
+      dockerfile: Dockerfile
     hostname: redmine
     domainname: test.local
-    ports:
-      - 8080:3000
+    expose:
+      - 3000
     environment:
       - REDMINE_DB_MYSQL=mysql
       - REDMINE_DB_PASSWORD=root
