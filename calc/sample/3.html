@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+<!--[if IE 9]><html class="no-js ie9"><![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js"><!--<![endif]-->
+
+	<title>金融第２事業部サイト -　作業時間管理</title>
+    <meta charset="utf-8">
+    <link href="/f2/workhour.css?20130317" rel="stylesheet" type="text/css">
+    <link href="/f2/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js" type="text/javascript"></script>
+    <script src="/f2/jquery.ui.datepicker-ja.min.js" type="text/javascript"></script>
+    <script src="/f2/stupidtable.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $(function(){$("table").stupidtable();});
+    </script>
+    <style type="text/css">th[data-sort]{cursor:pointer;}</style>
+    </head>
+
+<body>
+<div id="site_body">
+<!-- header -->
+<div id="site_header">
+<table width="100%">
+    <tr height="70px">
+        <td>
+            <table>
+            <tr><td><a href="/f2/workhour/index/menu"><img src="/f2/logo.gif" alt="株式会社SRAロゴ" width="164" height="38" border="0" /></a></td></tr>
+            <tr><td>
+                <form><select onchange="location.href=this.options[this.selectedIndex].value">
+                <option value="/f2/workhour/index/menu">　▼　サイトメニュー</option>
+<option value="/f2/workhour/index/menu">　☆トップメニュー</option>
+<option value="/f2/workhour/member/memberupdate/memberId/2817/selfSearch/1/menu/1">　登録情報・スキルの更新</option>                                                <option value="/f2/workhour/index/menu"></option>
+                </select></form>
+            </tr></td>
+            </table>
+        </td>
+        <td align="right" valign="top">
+        <table>
+          <tr><td align="right"><a href="/f2/workhour/password/passwordupdate">パスワード変更</a> | <a href="http://srapc3359/question2answer/" target="_blank">要望</a></td></tr>
+          <tr><td align="right">坂本 聖一(2817)さん | <a href="/f2/workhour/index/logout">ログアウト</a></td></tr>
+        </table>
+        </td>
+    </tr>
+</table>
+</div>
+<hr>
+<!-- end of header -->
+
+<!-- body contents -->
+<div id="page_contents">
+<div class="hidari"><a href="/f2/workhour/index/menu/">←メニューへ</a><br></div><div class="migi"><a href="/f2/workhour/workhour/projectinput/projectCd/nmr--by05/projectName/NRI_GX保守/direct/yes">残業申請へ→</a><br></div>
+<div class="summary_title">
+作業時間サマリ　：　NRI_GX保守(nmr--by05)</div>
+</div>
+
+
+<div class="summary_box">
+<form action="/f2/workhour/workhour/projectsummary/projectCd/nmr--by05/projectName/NRI_GX保守//direct/yes" method="post"><table style="margin-bottom:5px"><tr><td width="480px"><div>今月の合計作業時間</div></td><td width="370px"><div class="migi"><input name="inputMonth" id="inputMonth" type="month" value="2018-06" required>&nbsp;&nbsp;<input type="submit" name="move" id="move" value="移動" /><input type="hidden" name="prevMonth" value="2018-05" id="prevMonth"><input type="hidden" name="nextMonth" value="2018-07" id="nextMonth">&nbsp;&nbsp;<input style="width:50px" title="前月へ移動" type="submit" name="move" id="move" value="<<" onclick="document.getElementById('inputMonth').value = document.getElementById('prevMonth').value" />&nbsp;<input style="width:50px" title="翌月へ移動" type="submit" name="move" id="move" value=">>" onclick="document.getElementById('inputMonth').value = document.getElementById('nextMonth').value" /></td></tr></table></form><table class="box"><tr><th colspan="2">入退館ベース</th><th colspan="2">承認ベース</th><th rowspan="2">申請分合計<br>(うち未承認分)</th></tr><tr><th>作業時間合計</th><th>残業時間合計</th><th>作業時間合計</th><th>残業時間合計</th></tr><tr><td>0.00h</td><td>0.00h</td><td>0.00h</td><td>0.00h</td><td>93.50h(93.5h)</td></tr></table><table style="margin-top:5px;margin-bottom:5px"><tr><td width="74%" valign="bottom">メンバー別の作業時間</td><td width="300px"><table class="box"><tr><th colspan="2">今月の標準作業時間</th></tr><tr><td>0.00h / 157.50h</td></tr></table></td></tr></table><table class="box"><tr><th rowspan="2">氏名</td><th rowspan="2">区分</td><th colspan="2">入退館ベース</th><th colspan="2">承認ベース</th><th rowspan="2">申請分<br>(うち未承認分)</th><th colspan="2">標準作業時間との乖離</th></tr><tr><th>作業時間</th><th>残業時間</th><th>作業時間</th><th>残業時間</th><th>入退館ベース</th><th>承認ベース</th></tr><tr ><td><a target="_blank" href="/f2/workhour/workresults/workresultssearch/projectCd/nmr--by05/projectName/NRI_GX保守/memberId/1786/curDate/2018_06_01/direct/yes">鈴木  康之(1786)</a></td><td>主席</td><td>0.00h</td><td>0.00h</td><td>0.00h</td><td>0.00h</td><td>20.00h(20.00h)</td><td  >0.00h</td><td  >0.00h</td></tr><tr ><td><a target="_blank" href="/f2/workhour/workresults/workresultssearch/projectCd/nmr--by05/projectName/NRI_GX保守/memberId/2817/curDate/2018_06_01/direct/yes">坂本  聖一(2817)</a></td><td>主任</td><td>0.00h</td><td>0.00h</td><td>0.00h</td><td>0.00h</td><td>42.00h(42.00h)</td><td  >0.00h</td><td  >0.00h</td></tr><tr ><td><a target="_blank" href="/f2/workhour/workresults/workresultssearch/projectCd/nmr--by05/projectName/NRI_GX保守/memberId/4566/curDate/2018_06_01/direct/yes">多田  豊(4566)</a></td><td>主任</td><td>0.00h</td><td>0.00h</td><td>0.00h</td><td>0.00h</td><td>31.50h(31.50h)</td><td  >0.00h</td><td  >0.00h</td></tr><tr ><td><a target="_blank" href="/f2/workhour/workresults/workresultssearch/projectCd/nmr--by05/projectName/NRI_GX保守/memberId/023302/curDate/2018_06_01/direct/yes">加門  賢志(023302)</a></td><td>BP</td><td>0.00h</td><td>0.00h</td><td>0.00h</td><td>0.00h</td><td>0.00h</td><td  >0.00h</td><td  >0.00h</td></tr><tr ><td><a target="_blank" href="/f2/workhour/workresults/workresultssearch/projectCd/nmr--by05/projectName/NRI_GX保守/memberId/023306/curDate/2018_06_01/direct/yes">小川  貴之(023306)</a></td><td>BP</td><td>0.00h</td><td>0.00h</td><td>0.00h</td><td>0.00h</td><td>0.00h</td><td  >0.00h</td><td  >0.00h</td></tr><tr ><td><a target="_blank" href="/f2/workhour/workresults/workresultssearch/projectCd/nmr--by05/projectName/NRI_GX保守/memberId/078104/curDate/2018_06_01/direct/yes">雨宮  浩一(078104)</a></td><td>BP</td><td>0.00h</td><td>0.00h</td><td>0.00h</td><td>0.00h</td><td>0.00h</td><td  >0.00h</td><td  >0.00h</td></tr><tr ><td><a target="_blank" href="/f2/workhour/workresults/workresultssearch/projectCd/nmr--by05/projectName/NRI_GX保守/memberId/00810009/curDate/2018_06_01/direct/yes">劉  利(00810009)</a></td><td>BP</td><td>0.00h</td><td>0.00h</td><td>0.00h</td><td>0.00h</td><td>0.00h</td><td  >0.00h</td><td  >0.00h</td></tr></table></div></div>
+<!-- end of body_contents -->
+
+<div id="site_footer"><br><hr>Copyright 2012 Software Research Associates, Inc. All Rights Reserved.</div>
+
+</div>
+</body></html>
