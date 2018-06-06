@@ -29,10 +29,13 @@ waitBusy([ref]$ie)
 
 # getElementsByClassNamemesoddo 
 # 漢字コードによってマッチングできないためAタグ3番目決め打ち
-@(@([System.__ComObject].InvokeMember("getElementsByClassName", [System.Reflection.BindingFlags]::InvokeMethod, $null, $ie.Document, "box"))[0].getElementsByTagName("a"))[2].click()
+# 環境によっては getElementsByClassName が使えない
+# @(@([System.__ComObject].InvokeMember("getElementsByClassName", [System.Reflection.BindingFlags]::InvokeMethod, $null, $ie.Document, "box"))[0].getElementsByTagName("a"))[2].click()
+# @($ie.Document.getElementsByTagName("table") | Where-Object { $_.class -eq "box" })[0].@($_.getElementsByTagName("a"))[2].click()
+@(@($ie.Document.getElementsByTagName("table") | Where-Object { $_.getAttributeNode("class").textContent -eq "box" })[0].getElementsByTagName("a"))[2].click()
 waitBusy([ref]$ie)
 
-@([System.__ComObject].InvokeMember("getElementsByClassName", [System.Reflection.BindingFlags]::InvokeMethod, $null, $ie.Document, "box"))[2].getElementsByTagName("a") | ForEach-Object {
+@($ie.Document.getElementsByTagName("table") | Where-Object { $_.getAttributeNode("class").textContent -eq "box" })[2].getElementsByTagName("a") | ForEach-Object {
     $_.click()
     $ie2 = @($shell.Windows() | ? {$_.HWND -eq $hwnd})[-1]
     waitBusy([ref]$ie2)
