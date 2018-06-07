@@ -36,11 +36,25 @@ waitBusy([ref]$ie)
 waitBusy([ref]$ie)
 
 @($ie.Document.getElementsByTagName("table") | Where-Object { $_.getAttributeNode("class").textContent -eq "box" })[2].getElementsByTagName("a") | ForEach-Object {
+    Write-Host $_.innerText
     $_.click()
     $ie2 = @($shell.Windows() | ? {$_.HWND -eq $hwnd})[-1]
     waitBusy([ref]$ie2)
     $ie2.Document.getElementsByName("workDate[]") | ForEach-Object {
-        Write-Host $_.Value $_.parentElement.childNodes.Item(4).innerText
+        $date = [DateTime]::ParseExact($_.Value, "yyyyMMdd", $null)
+        if ($_.parentElement.getAttributeNode("bgcolor").textContent -eq "pink") {
+            $pink = 1
+        } else {
+            $pink = 0
+        }
+        $start = ""
+        $end = ""
+        if ($_.parentElement.childNodes.Item(4).innerText -match "([0-9][0-9]:[0-9][0-9]:[0-9][0-9]) - ([0-9][0-9]:[0-9][0-9]:[0-9][0-9])") {
+            $start = $Matches[1]
+            $end = $Matches[2]
+        }
+        $out = [String]::Join("`t", @($date.ToString("yyyy/MM/dd"), $pink, $start, $end))
+        Write-Host $out
     }
 }
 
