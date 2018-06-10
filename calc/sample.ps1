@@ -1,60 +1,59 @@
-[void][System.Reflection.Assembly]::LoadWithPartialName("Microsoft.mshtml")
+$BaseDir = Split-Path $MyInvocation.MyCommand.path
+$EnvFile = Join-Path $BaseDir "env.ps1"
+. $EnvFile
 
-$url = "http://172.127.56.72:88/sra00346/1.html"
-$user = "2817"
-$pass = "2817"
-
+$script:eigyo = 0
 $script:shell = New-Object -ComObject Shell.Application
-$ie = New-Object -ComObject InternetExplorer.Application
-$script:hwnd = $ie.HWND
+
+Function execMain {
+    Param([String]$url, $user, $pass, $outfile)
+    
+    $ie = New-Object -ComObject InternetExplorer.Application
+    $script:hwnd = $ie.HWND
+
+    $ie.Visible = $true
+    $ie.Navigate($url, 4)
+    waitBusy([ref]$ie)
+
+    @($ie.Document.getElementsByName("loginId"))[0].value = $user
+    @($ie.Document.getElementsByName("passwd"))[0].value = $pass
+    $ie.Document.getElementById("login_button").click()
+    waitBusy([ref]$ie)
+
+    @(@($ie.Document.getElementsByTagName("table"))[3].getElementsByTagName("a"))[2].click()
+    waitBusy([ref]$ie)
+
+    @($ie.Document.getElementsByTagName("table"))[7].getElementsByTagName("tr") | ForEach-Object {
+        $td = $_.getElementsByTagName("td") | %{$_.innerText.ToString()}
+        if ($td) {
+            if ($td[0] -match ".+\(([^)]+)\)") {
+                $td[0] = $Matches[1] + "`t"
+            }
+            $td -join "," | Out-File -FilePath $outfile -Encoding default -Append
+        }
+    }
+
+    if ($eigyo -eq 0) {
+        $a = @(@($ie.Document.getElementsByTagName("table"))[7].getElementsByTagName("a"))[0]
+        $a.target = "_self"
+        $a.click()
+        waitBusy([ref]$ie)
+
+        @($ie.Document.getElementsByTagName("table"))[4].getElementsByTagName("tr") | foreach-object -begin {$c = 0; $p = 0} -process {if ($_.outerHTML -match "workhourtable") {$c++; if ($_.outerHTML -match "pink") {$p++};}} -end {$eigyo = $c - $p}
+    }
+    write-host "�����̉c�Ɠ���${eigyo}��"
+    $ie.Quit()
+}
 
 Function waitBusy {
     Param([ref]$ie)
-    while ($ie.value.Document -isnot [mshtml.HTMLDocumentClass]) {
-        $ie.value = @($shell.Windows() | ? {$_.HWND -eq $hwnd})[-1]
-    }
+    $ie.value = @($shell.Windows() | ? {$_.HWND -eq $hwnd})[-1]
     while ($ie.value.busy -or $ie.value.readystate -ne 4) {
         Start-Sleep -Milliseconds 100
     }
 }
 
-$ie.Visible = $true
-$ie.Navigate($url, 4)
-waitBusy([ref]$ie)
-
-@($ie.Document.getElementsByName("loginId"))[0].value = $user
-@($ie.Document.getElementsByName("passwd"))[0].value = $pass
-$ie.Document.getElementById("login_button").click()
-waitBusy([ref]$ie)
-
-# getElementsByClassNamemesoddo 
-# 漢字コードによってマッチングできないためAタグ3番目決め打ち
-# 環境によっては getElementsByClassName が使えない
-# @(@([System.__ComObject].InvokeMember("getElementsByClassName", [System.Reflection.BindingFlags]::InvokeMethod, $null, $ie.Document, "box"))[0].getElementsByTagName("a"))[2].click()
-# @($ie.Document.getElementsByTagName("table") | Where-Object { $_.class -eq "box" })[0].@($_.getElementsByTagName("a"))[2].click()
-@(@($ie.Document.getElementsByTagName("table") | Where-Object { $_.getAttributeNode("class").textContent -eq "box" })[0].getElementsByTagName("a"))[2].click()
-waitBusy([ref]$ie)
-
-@($ie.Document.getElementsByTagName("table") | Where-Object { $_.getAttributeNode("class").textContent -eq "box" })[2].getElementsByTagName("a") | ForEach-Object {
-    Write-Host $_.innerText
-    $_.click()
-    $ie2 = @($shell.Windows() | ? {$_.HWND -eq $hwnd})[-1]
-    waitBusy([ref]$ie2)
-    $ie2.Document.getElementsByName("workDate[]") | ForEach-Object {
-        $date = [DateTime]::ParseExact($_.Value, "yyyyMMdd", $null)
-        if ($_.parentElement.getAttributeNode("bgcolor").textContent -eq "pink") {
-            $pink = 1
-        } else {
-            $pink = 0
-        }
-        $start = ""
-        $end = ""
-        if ($_.parentElement.childNodes.Item(4).innerText -match "([0-9][0-9]:[0-9][0-9]:[0-9][0-9]) - ([0-9][0-9]:[0-9][0-9]:[0-9][0-9])") {
-            $start = $Matches[1]
-            $end = $Matches[2]
-        }
-        $out = [String]::Join("`t", @($date.ToString("yyyy/MM/dd"), $pink, $start, $end))
-        Write-Host $out
-    }
+# Main
+foreach ($key in $users.Keys) {
+    execMain $topurl $users[$key][0] $users[$key][1] $csvfile
 }
-
