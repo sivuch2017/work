@@ -1,0 +1,14 @@
+Sub test()
+    Dim WSH, wExec, sCmd As String, Result As String
+    Set WSH = CreateObject("WScript.Shell")         ''(1)
+    sCmd = ActiveWorkbook.Path & "\7z.exe x -pkobu -o" & ActiveWorkbook.Path & " " & ActiveWorkbook.Path & "\test.zip"
+    MsgBox sCmd ''(2)
+    Set wExec = WSH.Exec("%ComSpec% /c " & sCmd)    ''(3)
+    Do While wExec.Status = 0                       ''(4)
+        DoEvents
+    Loop
+    Result = wExec.StdOut.ReadAll                   ''(5)
+    MsgBox Result
+    Set wExec = Nothing
+    Set WSH = Nothing
+End Sub
